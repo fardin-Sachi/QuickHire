@@ -1,0 +1,37 @@
+generator client {
+  provider = "prisma-client-js"
+  output   = "../src/generated"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+model Job {
+  id          Int          @id @default(autoincrement())
+  title       String
+  company     String
+  location    String
+  category    String
+  description String
+
+  created_at  DateTime      @default(now())
+  updated_at  DateTime?     @updatedAt
+
+  applications Application[]
+}
+// ● Job (id, title, company, location, category, description, created_at)
+// ● Application (id, job_id, name, email, resume_link, cover_note, created_at)
+model Application {
+  id          Int      @id @default(autoincrement())
+  jobId       Int
+  name        String
+  email       String
+  resume_link String
+  cover_note  String?
+
+  created_at  DateTime  @default(now())
+  updated_at  DateTime? @updatedAt
+
+  job         Job      @relation(fields: [jobId], references: [id])
+}
