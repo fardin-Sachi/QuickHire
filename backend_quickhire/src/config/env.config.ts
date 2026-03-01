@@ -1,7 +1,7 @@
 import dotenv from 'dotenv';
 import {z} from 'zod';
 import fs from 'fs';
-import path from 'path'
+import path from 'path';
 
 const NODE_ENV = process.env.NODE_ENV || "development";
 
