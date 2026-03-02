@@ -122,8 +122,8 @@ test-results/
 .LSOverride
 
 # Optional: NPM package lock differences
-package-lock.json
-yarn.lock
+# package-lock.json
+# yarn.lock
 
 # Prisma
 node_modules/.prisma/

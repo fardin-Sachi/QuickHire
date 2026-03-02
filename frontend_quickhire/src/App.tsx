@@ -1,35 +1,43 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
 import './App.css'
+import FeaturedJobs from './components/FeaturedJobsComponent'
+import FooterComponent from './components/FooterComponent'
+import HeroComponent from './components/HeroComponent'
+import JobCategoriesComponent from './components/JobCategoriesComponent'
+import LatestJobsComponent from './components/LatestJobsComponent'
+import NavbarComponent from './components/NavbarComponent'
+import PostJobsComponent from './components/PostJobsComponent'
+import TrustedCompanies from './components/TrustedCompanies'
+
 
 function App() {
-  const [count, setCount] = useState(0)
 
   return (
     <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
+      <div className="min-h-screen flex flex-col">
+        <div className="grow lg:mx-auto">
+          <NavbarComponent />
+          <HeroComponent />
+          
+          <main className='px-6 md:px-12 lg:px-20 gap-y-20 max-w-7xl pt-6 md:pt-12 lg:pt-20'>
+            
+            <TrustedCompanies />
+            <JobCategoriesComponent />
+            <PostJobsComponent
+              title="Start posting jobs today"
+              subtitle="Start posting jobs for only $10."
+              buttonText="Sign Up For Free"
+              // dashboardImage={dashboard}
+              onButtonClick={() => alert("Sign up clicked")}
+            />
+            <FeaturedJobs />
+            <LatestJobsComponent />
+          </main>
+          
+          <FooterComponent />
+        </div>
       </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
     </>
   )
 }
 
-export default App
+export default App;

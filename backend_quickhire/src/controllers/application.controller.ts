@@ -19,7 +19,7 @@ export const createApplication = async (req: Request, res: Response) => {
     })
 
     return res.status(201).json({ success: true, data: application })
-  } catch (err: any){
+  } catch(err: any){
     if(err.name === 'ZodError'){
       return res.status(400).json({ success: false, errors: err.errors })
     }
@@ -35,7 +35,7 @@ export const getAllApplications = async (_req: Request, res: Response) => {
       include: { job: true }
     })
     res.status(200).json({ success: true, data: applications })
-  } catch (err){
+  } catch(err){
     console.error('Error fetching applications:', err)
     res.status(500).json({ success: false, message: 'Internal server error' })
   }
@@ -53,8 +53,45 @@ export const getApplicationById = async (req: Request, res: Response) => {
     })
     if(!application) return res.status(404).json({ success: false, message: 'Application not found' })
     res.status(200).json({ success: true, data: application })
-  } catch (err){
+  } catch(err){
     console.error('Error fetching application:', err)
     res.status(500).json({ success: false, message: 'Internal server error' })
+  }
+}
+
+// Get resume link by application ID
+export const getResumeLinkByApplicationId = async (req: Request, res: Response) => {
+  const id = Number(req.params.id)
+
+  if(isNaN(id)){
+    return res.status(400).json({ success: false, message: 'Invalid ID' })
+  }
+
+  try {
+    const application = await prisma.application.findUnique({
+      where: { id },
+      select: { resume_link: true, name: true }
+    })
+
+    if(!application){
+      return res.status(404).json({ success: false, message: 'Application not found' })
+    }
+
+    if(!application.resume_link){
+      return res.status(404).json({ success: false, message: 'Resume not found' })
+    }
+
+    // Option 1: Redirect directly to resume link (simplest)
+    return res.redirect(application.resume_link);
+
+    /* Option 2 (Alternative): Return downloadable JSON link instead */ 
+    // return res.status(200).json({
+    //   success: true,
+    //   downloadUrl: application.resume_link
+    // });
+
+  } catch(err){
+    console.error('Error fetching resume link:', err)
+    return res.status(500).json({ success: false, message: 'Internal server error' })
   }
 }
