@@ -1,15 +1,12 @@
-// Load environment first
 import '../src/config/env.config';
 import { prisma } from '../src/config/prisma.config';
 
 async function main() {
   console.log('Seeding database...');
 
-  // Delete existing data
   await prisma.application.deleteMany({});
   await prisma.job.deleteMany({});
 
-  // Seed jobs
   const jobs = await prisma.job.createMany({
     data: [
       {
@@ -40,7 +37,6 @@ async function main() {
 
   const jobList = await prisma.job.findMany();
 
-  // Seed applications
   const applications = await prisma.application.createMany({
     data: [
       {
