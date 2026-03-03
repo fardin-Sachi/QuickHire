@@ -1,4 +1,3 @@
-import React from "react";
 import {
   Paintbrush,
   BarChart3,
@@ -54,7 +53,7 @@ function JobCategoriesComponent() {
               key={cat.title}
               className="group rounded-lg border border-[#E2E8F0] bg-white p-6 cursor-pointer
               transition-all duration-300
-              hover:bg-gradient-to-br hover:from-[#4F46E5] hover:to-[#4338CA]
+              hover:bg-linear-to-br hover:from-[#4F46E5] hover:to-[#4338CA]
               hover:text-white hover:border-transparent"
             >
               <div className="mb-8 text-[#4F46E5] group-hover:text-white transition-colors">
@@ -87,7 +86,7 @@ function JobCategoriesComponent() {
               className="group flex items-center justify-between bg-white border border-[#E2E8F0]
               rounded-lg px-5 py-4 cursor-pointer
               transition-all duration-300
-              hover:bg-gradient-to-r hover:from-[#4F46E5] hover:to-[#4338CA]
+              hover:bg-linear-to-r hover:from-[#4F46E5] hover:to-[#4338CA]
               hover:text-white hover:border-transparent"
             >
               <div className="flex items-center gap-4">

@@ -1,4 +1,12 @@
 import { ArrowRight } from "lucide-react";
+import Revolut from "../assets/companyLogos/revolut.svg"
+import dropbox from "../assets/companyLogos/dropbox.svg"
+import pitch from "../assets/companyLogos/pitch.svg"
+import blinkist from "../assets/companyLogos/blinklist.svg"
+import classpass from "../assets/companyLogos/classpass.svg"
+import canva from "../assets/companyLogos/canva.svg"
+import godaddy from "../assets/companyLogos/godaddy.svg"
+import twitter from "../assets/companyLogos/twitter.svg"
 
 const jobs = [
   {
@@ -9,7 +17,7 @@ const jobs = [
     description:
       "Revolut is looking for Email Marketing to help team ma ...",
     tags: ["Marketing", "Design"],
-    logo: "R",
+    logo: Revolut
   },
   {
     id: 2,
@@ -19,7 +27,7 @@ const jobs = [
     description:
       "Dropbox is looking for Brand Designer to help the team ...",
     tags: ["Design", "Business"],
-    logo: "D",
+    logo: dropbox
   },
   {
     id: 3,
@@ -29,7 +37,7 @@ const jobs = [
     description:
       "Pitch is looking for Customer Manager to join marketing t ...",
     tags: ["Marketing"],
-    logo: "P",
+    logo: pitch
   },
   {
     id: 4,
@@ -39,7 +47,7 @@ const jobs = [
     description:
       "Blinkist is looking for Visual Designer to help team desi ...",
     tags: ["Design"],
-    logo: "B",
+    logo: blinkist
   },
   {
     id: 5,
@@ -49,7 +57,7 @@ const jobs = [
     description:
       "ClassPass is looking for Product Designer to help us ...",
     tags: ["Marketing", "Design"],
-    logo: "C",
+    logo: classpass
   },
   {
     id: 6,
@@ -59,7 +67,7 @@ const jobs = [
     description:
       "Canva is looking for Lead Engineer to help develop n ...",
     tags: ["Design", "Business"],
-    logo: "C",
+    logo: canva
   },
   {
     id: 7,
@@ -69,7 +77,7 @@ const jobs = [
     description:
       "GoDaddy is looking for Brand Strategist to join the team ...",
     tags: ["Marketing"],
-    logo: "G",
+    logo: godaddy
   },
   {
     id: 8,
@@ -79,7 +87,7 @@ const jobs = [
     description:
       "Twitter is looking for Data Analyst to help team desi ...",
     tags: ["Technology"],
-    logo: "T",
+    logo: twitter
   },
 ];
 
@@ -116,13 +124,19 @@ const FeaturedJobsComponent = () => {
           {jobs.map((job) => (
             <div
               key={job.id}
-              className="snap-start min-w-[280px] max-w-[280px] border border-gray-200 rounded-xl p-6 bg-white"
+              className="snap-start min-w-70 max-w-70 border border-gray-200 rounded-xl p-6 bg-white"
             >
               {/* Top */}
               <div className="flex items-start justify-between mb-6">
-                <div className="w-12 h-12 flex items-center justify-center rounded-lg bg-gray-100 text-xl font-semibold text-gray-700">
+                {/* <div className="w-12 h-12 flex items-center justify-center rounded-lg bg-gray-100 text-xl font-semibold text-gray-700">
                   {job.logo}
-                </div>
+                </div> */}
+                <img className="w-12 h-12 object-contain"
+                  src={job.logo} 
+                  alt={`${job.company} logo`} 
+                  loading="lazy"
+                  decoding="async"
+                />
 
                 <span className="text-xs font-medium px-3 py-1 border border-blue-500 text-blue-600 rounded-md">
                   Full Time
@@ -164,9 +178,16 @@ const FeaturedJobsComponent = () => {
             className="group border border-gray-200 rounded-xl p-6 hover:shadow-lg transition-all duration-300 bg-white"
           >
             <div className="flex items-start justify-between mb-6">
-              <div className="w-12 h-12 flex items-center justify-center rounded-lg bg-gray-100 text-xl font-semibold text-gray-700">
+              {/* <div className="w-12 h-12 flex items-center justify-center rounded-lg bg-gray-100 text-xl font-semibold text-gray-700">
                 {job.logo}
-              </div>
+              </div> */}
+
+              <img className="w-12 h-12 object-contain"
+                src={job.logo} 
+                alt={`${job.company} logo`} 
+                loading="lazy"
+                decoding="async"
+              />
 
               <span className="text-xs font-medium px-3 py-1 border border-blue-500 text-blue-600 rounded-md">
                 Full Time

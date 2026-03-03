@@ -1,4 +1,4 @@
-import React from "react";
+import hero from '../assets/hero.svg'
 
 function HeroComponent() {
   return (
@@ -115,9 +115,9 @@ function HeroComponent() {
           {/* HERO IMAGE (ABSOLUTE on Desktop) */}
           <div className="hidden lg:block absolute right-0 top-10">
             <img
-              src="/hero-image.png"
+              src={hero}
               alt="Hero"
-              className="w-[450px] object-contain"
+              className="w-112.5 object-contain"
             />
           </div>
         </div>

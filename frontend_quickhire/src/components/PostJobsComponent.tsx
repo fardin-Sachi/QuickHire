@@ -1,5 +1,3 @@
-import React from "react";
-
 interface PostJobsProps {
   title: string;
   subtitle: string;

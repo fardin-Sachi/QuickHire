@@ -1,5 +1,6 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { Menu, X } from "lucide-react";
+import Logo from "../../public/vite.svg"
 
 function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
@@ -10,7 +11,10 @@ function Navbar() {
 
         {/* LOGO */}
         <div className="flex items-center gap-2">
-          <div className="w-8 h-8 bg-blue-600 rounded-full"></div>
+          <img className="w-8 h-8" 
+            src={Logo} 
+            alt="QuickHire Logo" 
+            />
           <span className="text-xl font-semibold text-gray-800">
             QuickHire
           </span>

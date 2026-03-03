@@ -1,4 +1,9 @@
-import React from "react";
+import nomad from "../assets/companyLogos/nomad.svg";
+import dropbox from "../assets/companyLogos/dropbox.svg";
+import terraform from "../assets/companyLogos/terraform.svg";
+import packer from "../assets/companyLogos/packer.svg";
+import netlify from "../assets/companyLogos/netlify.svg";
+import maze from "../assets/companyLogos/maze.svg";
 
 type JobTag = {
   label: string;
@@ -21,7 +26,7 @@ const jobs: Job[] = [
     title: "Social Media Assistant",
     company: "Nomad",
     location: "Paris, France",
-    logo: "/logos/nomad.svg",
+    logo: nomad,
     tags: [
       { label: "Full-Time", variant: "filled", color: "green" },
       { label: "Marketing", variant: "outline", color: "orange" },
@@ -33,7 +38,7 @@ const jobs: Job[] = [
     title: "Brand Designer",
     company: "Dropbox",
     location: "San Francisco, USA",
-    logo: "/logos/dropbox.svg",
+    logo: dropbox,
     tags: [
       { label: "Full-Time", variant: "filled", color: "red" },
       { label: "Design", variant: "outline", color: "blue" },
@@ -44,7 +49,7 @@ const jobs: Job[] = [
     title: "Interactive Developer",
     company: "Terraform",
     location: "Hamburg, Germany",
-    logo: "/logos/terraform.svg",
+    logo: terraform,
     tags: [
       { label: "Full-Time", variant: "filled", color: "orange" },
       { label: "Developer", variant: "outline", color: "blue" },
@@ -55,7 +60,7 @@ const jobs: Job[] = [
     title: "HR Manager",
     company: "Packer",
     location: "Lucern, Switzerland",
-    logo: "/logos/packer.svg",
+    logo: packer,
     tags: [
       { label: "Full-Time", variant: "filled", color: "green" },
       { label: "Marketing", variant: "outline", color: "orange" },
@@ -67,7 +72,7 @@ const jobs: Job[] = [
     title: "Social Media Assistant",
     company: "Netlify",
     location: "Paris, France",
-    logo: "/logos/netlify.svg",
+    logo: netlify,
     tags: [
       { label: "Full-Time", variant: "filled", color: "green" },
       { label: "Marketing", variant: "outline", color: "orange" },
@@ -78,7 +83,7 @@ const jobs: Job[] = [
     title: "Brand Designer",
     company: "Maze",
     location: "San Francisco, USA",
-    logo: "/logos/maze.svg",
+    logo: maze,
     tags: [
       { label: "Full-Time", variant: "filled", color: "green" },
       { label: "Marketing", variant: "outline", color: "orange" },
@@ -125,7 +130,12 @@ const JobCard: React.FC<{ job: Job }> = ({ job }) => {
     <div className="bg-gray-50 p-6 rounded-xl hover:shadow-md transition duration-300">
       <div className="flex items-start gap-4">
         <div className="w-12 h-12 flex items-center justify-center bg-white rounded-lg shadow-sm">
-          <img src={job.logo} alt={job.company} className="w-8 h-8" />
+          <img className="w-8 h-8" 
+            src={job.logo} 
+            alt={job.company} 
+            loading="lazy"
+            decoding="async"
+          />
         </div>
 
         <div className="flex-1">

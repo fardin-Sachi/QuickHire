@@ -1,11 +1,15 @@
-import React from 'react'
+import vodafone from '../assets/logos/vodafone.svg'
+import intel from '../assets/logos/intel.svg'
+import tesla from '../assets/logos/tesla.svg'
+import amd from '../assets/logos/amd.svg'
+import talkit from '../assets/logos/talkit.svg'
 
 const companies = [
-  { name: "Vodafone", logo: "/logos/vodafone.svg" },
-  { name: "Intel", logo: "/logos/intel.svg" },
-  { name: "Tesla", logo: "/logos/tesla.svg" },
-  { name: "AMD", logo: "/logos/amd.svg" },
-  { name: "Talkit", logo: "/logos/talkit.svg" },
+  { name: "Vodafone", logo: vodafone },
+  { name: "Intel", logo: intel },
+  { name: "Tesla", logo: tesla },
+  { name: "AMD", logo: amd },
+  { name: "Talkit", logo: talkit },
 ];
 
 function TrustedCompanies() {

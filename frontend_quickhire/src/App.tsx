@@ -7,6 +7,7 @@ import LatestJobsComponent from './components/LatestJobsComponent'
 import NavbarComponent from './components/NavbarComponent'
 import PostJobsComponent from './components/PostJobsComponent'
 import TrustedCompanies from './components/TrustedCompanies'
+import dashboardImage from './assets/dashboard.svg'
 
 
 function App() {
@@ -26,7 +27,7 @@ function App() {
               title="Start posting jobs today"
               subtitle="Start posting jobs for only $10."
               buttonText="Sign Up For Free"
-              // dashboardImage={dashboard}
+              dashboardImage={dashboardImage}
               onButtonClick={() => alert("Sign up clicked")}
             />
             <FeaturedJobs />
