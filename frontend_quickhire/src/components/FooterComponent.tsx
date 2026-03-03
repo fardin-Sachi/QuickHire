@@ -9,7 +9,7 @@ import {
 
 const FooterComponent = () => {
   return (
-    <footer className="bg-gradient-to-br from-[#1f2432] to-[#1b2030] text-gray-300">
+    <footer className="bg-linear-to-br from-[#1f2432] to-[#1b2030] text-gray-300">
       <div className="max-w-7xl mx-auto px-6 lg:px-8 pt-16 pb-10">
         {/* Top Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-y-14 gap-x-12">
@@ -90,7 +90,7 @@ const FooterComponent = () => {
                 className="w-full sm:flex-1 px-4 py-3 rounded-md bg-gray-200 text-gray-700 placeholder-gray-500 focus:outline-none"
               />
 
-              <button className="sm:w-auto w-1/2 sm:w-auto px-6 py-3 bg-gradient-to-r from-indigo-500 to-purple-600 text-white font-semibold rounded-md hover:opacity-90 transition">
+              <button className="sm:w-auto w-1/2 px-6 py-3 bg-linear-to-r from-indigo-500 to-purple-600 text-white font-semibold rounded-md hover:opacity-90 transition">
                 Subscribe
               </button>
             </div>
