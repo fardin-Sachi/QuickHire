@@ -9,6 +9,7 @@ import {
   Users,
   ArrowRight,
 } from "lucide-react";
+import { Link } from "react-router-dom";
 
 type Category = {
   title: string;
@@ -37,13 +38,18 @@ function JobCategoriesComponent() {
             Explore by <span className="text-[#3B82F6]">category</span>
           </h2>
 
-          <a
+          {/* <a
             href="#"
             className="hidden md:flex items-center gap-2 text-[#3B82F6] font-medium hover:gap-3 transition-all"
           >
             Show all jobs
             <ArrowRight size={18} />
-          </a>
+          </a> */}
+
+          <Link className="hidden md:flex items-center gap-2 text-[#3B82F6] font-medium hover:gap-3 transition-all"
+            to="/jobs">
+            Show all jobs <ArrowRight size={18} />
+          </Link>
         </div>
 
         {/* ================= DESKTOP GRID ================= */}

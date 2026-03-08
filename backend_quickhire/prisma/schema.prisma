@@ -11,7 +11,7 @@ model Job {
   title       String
   company     String
   location    String
-  category    String
+  category    String[]
   description String
 
   created_at  DateTime      @default(now())

@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { Menu, X } from "lucide-react";
 import Logo from "../../public/vite.svg"
+import { Link } from "react-router-dom";
 
 function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
@@ -10,7 +11,9 @@ function Navbar() {
       <div className="max-w-7xl mx-auto px-6 lg:px-12 py-5 flex items-center justify-between">
 
         {/* LOGO */}
-        <div className="flex items-center gap-2">
+        <Link className="flex items-center gap-2"
+          to="/"
+          >
           <img className="w-8 h-8" 
             src={Logo} 
             alt="QuickHire Logo" 
@@ -18,13 +21,17 @@ function Navbar() {
           <span className="text-xl font-semibold text-gray-800">
             QuickHire
           </span>
-        </div>
+        </Link>
 
         {/* DESKTOP MENU */}
         <nav className="hidden lg:flex items-center gap-10 text-gray-600">
-          <a href="#" className="hover:text-blue-600 transition">
-            Find Jobs
-          </a>
+          {/* <a href="#" className="">
+            
+          </a> */}
+          <Link className="hover:text-blue-600 transition"
+              to="/jobs">
+              Find Jobs
+            </Link>
           <a href="#" className="hover:text-blue-600 transition">
             Browse Companies
           </a>

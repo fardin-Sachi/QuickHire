@@ -1,44 +1,27 @@
-import './App.css'
-import FeaturedJobs from './components/FeaturedJobsComponent'
-import FooterComponent from './components/FooterComponent'
-import HeroComponent from './components/HeroComponent'
-import JobCategoriesComponent from './components/JobCategoriesComponent'
-import LatestJobsComponent from './components/LatestJobsComponent'
-import NavbarComponent from './components/NavbarComponent'
-import PostJobsComponent from './components/PostJobsComponent'
-import TrustedCompanies from './components/TrustedCompanies'
-import dashboardImage from './assets/dashboard.svg'
-
+// import "./App.css";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import Home from "./pages/HomePage";
+import Jobs from "./pages/JobListPage";
+import PageNotFound from "./pages/PageNotFound";
+import JobDetailsPage from "./pages/JobDetailPage";
+import AdminJobsPage from "./pages/AdminPage";
 
 function App() {
-
   return (
-    <>
-      <div className="min-h-screen flex flex-col">
-        <div className="grow lg:mx-auto">
-          <NavbarComponent />
-          <HeroComponent />
-          
-          <main className='px-6 md:px-12 lg:px-20 gap-y-20 max-w-7xl pt-6 md:pt-12 lg:pt-20'>
-            
-            <TrustedCompanies />
-            <JobCategoriesComponent />
-            <PostJobsComponent
-              title="Start posting jobs today"
-              subtitle="Start posting jobs for only $10."
-              buttonText="Sign Up For Free"
-              dashboardImage={dashboardImage}
-              onButtonClick={() => alert("Sign up clicked")}
-            />
-            <FeaturedJobs />
-            <LatestJobsComponent />
-          </main>
-          
-          <FooterComponent />
-        </div>
-      </div>
-    </>
-  )
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" element={<Home />} />
+
+        <Route path="/jobs" element={<Jobs />} />
+
+        <Route path="/jobs/:id" element={<JobDetailsPage />} />
+
+        <Route path="/admin/jobs" element={<AdminJobsPage />} />
+
+        <Route path="*" element={<PageNotFound />} />
+      </Routes>
+    </BrowserRouter>
+  );
 }
 
 export default App;
