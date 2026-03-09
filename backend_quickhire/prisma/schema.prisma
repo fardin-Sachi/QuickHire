@@ -32,5 +32,5 @@ model Application {
   created_at  DateTime  @default(now())
   updated_at  DateTime? @updatedAt
 
-  job         Job      @relation(fields: [jobId], references: [id])
+  job         Job      @relation(fields: [jobId], references: [id], onDelete: Cascade)
 }

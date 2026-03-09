@@ -1,26 +1,48 @@
-import { useState } from "react";
-import { jobs } from "../data/jobs";
+import { useEffect, useState } from "react";
 import JobCardComponent from "./JobCardComponent";
 import { useNavigate } from "react-router-dom";
 import { ArrowLeft } from "lucide-react";
+import { jobApiService } from "../services/job.service";
+import type { Job } from "../types/Job";
+import { companyLogos } from "../data/jobs";
+import LoaderComponent from "./LoaderComponent";
 
-// const tagStyles: Record<string, string> = {
-//   Marketing: "bg-orange-100 text-orange-600",
-//   Design: "bg-emerald-100 text-emerald-600",
-//   Business: "bg-indigo-100 text-indigo-600",
-//   Technology: "bg-red-100 text-red-500",
-// };
+type JobWithLogo = Job & { logo: string };
 
-const JOBS_PER_PAGE = 14;
+const getLogoById = (jobId: number) =>
+  companyLogos[jobId % companyLogos.length];
 
 const JobListComponent = () => {
   const navigate = useNavigate();
+
+  const [jobs, setJobs] = useState<JobWithLogo[]>([]);
   const [page, setPage] = useState(1);
+  const [totalPages, setTotalPages] = useState(1);
+  const [loading, setLoading] = useState(true);
 
-  const totalPages = Math.ceil(jobs.length / JOBS_PER_PAGE);
+  useEffect(() => {
+    const fetchJobs = async () => {
+      try {
+        setLoading(true);
+        const response = await jobApiService.getJobs({ page, limit: 10 });
+        const jobsWithLogos = response.data.map((job) => ({
+          ...job,
+          logo: getLogoById(job.id),
+        }));
+        setJobs(jobsWithLogos);
+        setTotalPages(response.pagination.totalPages);
+      } catch (err) {
+        console.error(err);
+      } finally {
+        setLoading(false);
+      }
+    };
+    fetchJobs();
+  }, [page]);
 
-  // const start = (page - 1) * JOBS_PER_PAGE;
-  // const currentJobs = jobs.slice(start, start + JOBS_PER_PAGE);
+  if(loading) {
+    return <LoaderComponent fullScreen />;
+  }
 
   return (
     <section className="w-full bg-white py-12">

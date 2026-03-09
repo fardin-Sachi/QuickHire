@@ -1,10 +1,18 @@
-import { useRef } from "react";
+import { useEffect, useState, useRef, useMemo } from "react";
 import { ArrowRight } from "lucide-react";
 import { Link } from "react-router-dom";
-import { jobs } from "../data/jobs";
+import { jobApiService } from "../services/job.service";
 import JobCardComponent from "./JobCardComponent";
+import { companyLogos } from "../data/jobs";
+import type { Job } from "../types/Job";
 
-const FeaturedJobsComponent = () => {
+type JobWithLogo = Job & { logo: string };
+
+const getLogoById = (jobId: number) =>
+  companyLogos[jobId % companyLogos.length];
+
+const FeaturedJobsComponent: React.FC = () => {
+  const [jobs, setJobs] = useState<JobWithLogo[]>([]);
   const sliderRef = useRef<HTMLDivElement>(null);
 
   const isTouchingRef = useRef(false);
@@ -14,48 +22,59 @@ const FeaturedJobsComponent = () => {
   const startXRef = useRef(0);
   const scrollLeftRef = useRef(0);
 
+  useEffect(() => {
+    const fetchJobs = async () => {
+      try {
+        const response = await jobApiService.getJobs({ limit: 8 });
+
+        const jobsWithLogos: JobWithLogo[] = response.data.map((job) => ({
+          ...job,
+          logo: getLogoById(job.id),
+        }));
+
+        setJobs(jobsWithLogos);
+      } catch (err) {
+        console.error("Failed to fetch featured jobs", err);
+      }
+    };
+
+    fetchJobs();
+  }, []);
+
   const handleMouseDown = (e: React.MouseEvent) => {
     if (!sliderRef.current) return;
     isDownRef.current = true;
     startXRef.current = e.pageX - sliderRef.current.offsetLeft;
     scrollLeftRef.current = sliderRef.current.scrollLeft;
   };
-
-  const handleMouseLeave = () => {
-    isDownRef.current = false;
-  };
-
-  const handleMouseUp = () => {
-    isDownRef.current = false;
-  };
-
+  const handleMouseLeave = () => (isDownRef.current = false);
+  const handleMouseUp = () => (isDownRef.current = false);
   const handleMouseMove = (e: React.MouseEvent) => {
     if (!isDownRef.current || !sliderRef.current) return;
     e.preventDefault();
     const x = e.pageX - sliderRef.current.offsetLeft;
-    const walk = (x - startXRef.current) * 2; // scroll speed
-    sliderRef.current.scrollLeft = scrollLeftRef.current - walk;
+    sliderRef.current.scrollLeft =
+      scrollLeftRef.current - (x - startXRef.current) * 2;
   };
-
   const handleTouchStart = (e: React.TouchEvent) => {
     if (!sliderRef.current) return;
     isTouchingRef.current = true;
     touchStartXRef.current = e.touches[0].pageX - sliderRef.current.offsetLeft;
     touchScrollLeftRef.current = sliderRef.current.scrollLeft;
   };
-
-  const handleTouchEnd = () => {
-    isTouchingRef.current = false;
-  };
-
+  const handleTouchEnd = () => (isTouchingRef.current = false);
   const handleTouchMove = (e: React.TouchEvent) => {
     if (!isTouchingRef.current || !sliderRef.current) return;
-
     const x = e.touches[0].pageX - sliderRef.current.offsetLeft;
-    const walk = (x - touchStartXRef.current) * 2;
-
-    sliderRef.current.scrollLeft = touchScrollLeftRef.current - walk;
+    sliderRef.current.scrollLeft =
+      touchScrollLeftRef.current - (x - touchStartXRef.current) * 2;
   };
+
+  /*** Memoized job cards ***/
+  const jobCards = useMemo(
+    () => jobs.map((job) => <JobCardComponent key={job.id} job={job} />),
+    [jobs],
+  );
 
   return (
     <section className="w-full bg-white py-10">
@@ -88,7 +107,7 @@ const FeaturedJobsComponent = () => {
       >
         <div className="flex gap-6 w-max snap-x snap-mandatory scroll-smooth">
           {jobs.map((job) => (
-            <div key={job.id} className="snap-start min-w-70">
+            <div key={job.id} className="snap-start shrink-0 w-62.5">
               <JobCardComponent job={job} />
             </div>
           ))}
@@ -96,10 +115,8 @@ const FeaturedJobsComponent = () => {
       </div>
 
       {/* DESKTOP GRID */}
-      <div className="hidden md:grid max-w-7xl mx-auto px-6 grid-cols-2 lg:grid-cols-4 gap-8">
-        {jobs.map((job) => (
-          <JobCardComponent key={job.id} job={job} />
-        ))}
+      <div className="hidden md:grid max-w-7xl mx-auto px-6 grid-cols-2 lg:grid-cols-4 gap-8 auto-rows-fr">
+        {jobCards}
       </div>
 
       <div className="mt-10 md:hidden px-6">
@@ -114,4 +131,6 @@ const FeaturedJobsComponent = () => {
   );
 };
 
-export default FeaturedJobsComponent;
+import { memo } from "react";
+
+export default memo(FeaturedJobsComponent);

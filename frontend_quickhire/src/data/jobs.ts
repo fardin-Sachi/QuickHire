@@ -12,10 +12,21 @@ export type Job = {
   title: string;
   company: string;
   location: string;
-  category: string;
+  category: string[];
   description: string;
   logo: string;
 };
+
+export const companyLogos = [
+  Revolut,
+  dropbox,
+  pitch,
+  blinkist,
+  classpass,
+  canva,
+  godaddy,
+  twitter
+];
 
 export const categoryStyles: Record<string, string> = {
   Marketing: "bg-orange-100 text-orange-600",
@@ -30,7 +41,7 @@ export const jobs: Job[] = [
     company: "Revolut",
     title: "Email Marketing",
     location: "Madrid, Spain",
-    category: "Marketing",
+    category: ["Marketing"],
     description:
       "Revolut is looking for an Email Marketing specialist to help manage campaigns and grow engagement.",
     logo: Revolut,
@@ -40,7 +51,7 @@ export const jobs: Job[] = [
     company: "Dropbox",
     title: "Brand Designer",
     location: "San Francisco, US",
-    category: "Design",
+    category: ["Design"],
     description:
       "Dropbox is looking for a Brand Designer to help strengthen visual identity across products.",
     logo: dropbox,
@@ -50,7 +61,7 @@ export const jobs: Job[] = [
     company: "Pitch",
     title: "Email Marketing",
     location: "Berlin, Germany",
-    category: "Marketing",
+    category: ["Marketing"],
     description:
       "Pitch is looking for a Customer Marketing Manager to join the marketing team.",
     logo: pitch,
@@ -60,7 +71,7 @@ export const jobs: Job[] = [
     company: "Blinkist",
     title: "Visual Designer",
     location: "Granada, Spain",
-    category: "Design",
+    category: ["Design"],
     description:
       "Blinkist is looking for a Visual Designer to support the design team in creating engaging assets.",
     logo: blinkist,
@@ -70,7 +81,7 @@ export const jobs: Job[] = [
     company: "ClassPass",
     title: "Product Designer",
     location: "Manchester, UK",
-    category: "Design",
+    category: ["Design"],
     description:
       "ClassPass is looking for a Product Designer to craft intuitive experiences for users.",
     logo: classpass,
@@ -80,7 +91,7 @@ export const jobs: Job[] = [
     company: "Canva",
     title: "Lead Designer",
     location: "Ontario, Canada",
-    category: "Design",
+    category: ["Design"],
     description:
       "Canva is looking for a Lead Designer to help lead the design direction for new features.",
     logo: canva,
@@ -90,7 +101,7 @@ export const jobs: Job[] = [
     company: "GoDaddy",
     title: "Brand Strategist",
     location: "Marseille, France",
-    category: "Marketing",
+    category: ["Marketing"],
     description:
       "GoDaddy is looking for a Brand Strategist to guide brand campaigns and messaging.",
     logo: godaddy,
@@ -100,7 +111,7 @@ export const jobs: Job[] = [
     company: "Twitter",
     title: "Data Analyst",
     location: "San Diego, US",
-    category: "Technology",
+    category: ["Technology"],
     description:
       "Twitter is looking for a Data Analyst to analyze platform data and generate insights.",
     logo: twitter,
