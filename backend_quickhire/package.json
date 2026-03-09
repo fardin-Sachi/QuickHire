@@ -12,11 +12,11 @@
   "license": "ISC",
   "author": "Fardin Ahsan",
   "type": "module",
-  "main": "dist/src/server.js",
+  "main": "dist/server.js",
   "scripts": {
     "dev": "cross-env NODE_ENV=development tsx watch src/server.ts",
     "build": "prisma generate && tsc && prisma migrate deploy",
-    "start": "cross-env NODE_ENV=production node dist/src/server.js"
+    "start": "cross-env NODE_ENV=production node dist/server.js"
   },
   "dependencies": {
     "@types/node": "^25.3.2",
