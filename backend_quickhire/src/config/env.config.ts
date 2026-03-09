@@ -5,7 +5,7 @@ import path from 'path';
 
 const NODE_ENV = process.env.NODE_ENV || "development";
 
-const envFilePath = path.resolve(process.cwd(), `.env.${NODE_ENV === "production" ? "prod" : "dev"}`);
+const envFilePath = path.resolve(process.cwd(), `.env${NODE_ENV === "production" ? "" : ".dev"}`);
 if (!fs.existsSync(envFilePath)) {
   throw new Error(`Environment file not found: ${envFilePath}`);
 }
