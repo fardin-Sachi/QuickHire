@@ -1,7 +1,7 @@
 import express, {Request, Response} from "express";
 import { indexRouer } from "./routes/index.route.js";
-import {startServer} from './lib/startServer.js'
-import cors from 'cors';
+import {startServer} from './lib/startServer.js';
+import cors from 'cors'
 
 export const app = express();
 
@@ -14,8 +14,6 @@ app.get('/health',(req: Request, res: Response) => {
 });
 
 app.use('/api', indexRouer);
-
-
 
 
 startServer();

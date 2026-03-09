@@ -9,11 +9,10 @@
   "license": "ISC",
   "author": "Fardin Ahsan",
   "type": "module",
-  "main": "dist/server.js",
+  "main": "dist/src/server.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "cross-env NODE_ENV=development tsx watch src/server.ts",
-    "build": "tsc",
+    "build": "prisma generate && prisma migrate deploy && tsc",
     "start": "cross-env NODE_ENV=production node dist/server.js"
   },
   "dependencies": {
