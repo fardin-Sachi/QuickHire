@@ -1,16 +1,12 @@
----
-
 # QuickHire – Job Board Application
 
-QuickHire is a full-stack job board platform where companies can post jobs and candidates can browse and apply.
-The project is built with a **modern TypeScript stack**, using **Express + Prisma + PostgreSQL** for the backend and **React + Vite + TailwindCSS** for the frontend.
+**QuickHire** is a modern, full-stack job board application that allows companies to post jobs and candidates to browse and apply. It is built with a **TypeScript-first stack** using **Express**, **Prisma**, **PostgreSQL** on the backend and **React**, **Vite**, **TailwindCSS** on the frontend.
 
 **Live URLs:**
 
 * Backend: [https://quickhire-backend-p80j.onrender.com](https://quickhire-backend-p80j.onrender.com)
 * Frontend: [https://quick--hire.vercel.app](https://quick--hire.vercel.app)
 
----
 
 ## 🚀 Tech Stack
 
