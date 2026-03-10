@@ -1,6 +1,7 @@
-export interface JobQueryParams {
+export type JobQueryParams = {
+  page?: number;
+  limit?: number;
   search?: string;
   location?: string;
-  limit?: number;
-  page?: number;
-}
+  category?: string[];
+};
