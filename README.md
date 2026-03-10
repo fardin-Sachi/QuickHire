@@ -167,17 +167,23 @@ http://localhost:5173
 
 ---
 
+Here’s an updated version of your **API Endpoints** section for `README.md` with the new category endpoints included and pagination info:
+
+---
+
 ## 📡 API Endpoints
 
 ### Jobs
 
-| Method | Path                           | Description             |
-| ------ | ------------------------------ | ----------------------- |
-| GET    | `/api/jobs`                    | Get all jobs            |
-| GET    | `/api/jobs/:id`                | Get job by ID           |
-| GET    | `/api/jobs/location-available` | Get available locations |
-| POST   | `/api/jobs`                    | Create a new job        |
-| DELETE | `/api/jobs/:id`                | Delete a job by ID      |
+| Method | Path                            | Description                                                       |
+| ------ | ------------------------------- | ----------------------------------------------------------------- |
+| GET    | `/api/jobs`                     | Get all jobs (supports `page`, `limit`, `search`, `location`)     |
+| GET    | `/api/jobs/:id`                 | Get job by ID                                                     |
+| GET    | `/api/jobs/location-available`  | Get all available job locations                                   |
+| GET    | `/api/jobs/categories`          | Get all unique job categories (supports `page`, `limit`)          |
+| GET    | `/api/jobs/categories/category` | Get jobs by category (supports `category` array, `page`, `limit`) |
+| POST   | `/api/jobs`                     | Create a new job                                                  |
+| DELETE | `/api/jobs/:id`                 | Delete a job by ID                                                |
 
 ### Applications
 
@@ -188,7 +194,7 @@ http://localhost:5173
 | GET    | `/api/applications/:id`        | Get an application by ID           |
 | GET    | `/api/applications/resume/:id` | Get resume link for an application |
 
-> Note: Frontend should prepend the backend URL if using API calls, e.g. `https://quickhire-backend-p80j.onrender.com/api/jobs`.
+> **Note:** Frontend should prepend the backend URL if using API calls, e.g. `https://quickhire-backend-p80j.onrender.com`.
 
 ---
 
