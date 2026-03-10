@@ -42,7 +42,7 @@ const FooterComponent = () => {
                 (item) => (
                   <li key={item}>
                     <a
-                      href="#"
+                      // href="#"
                       className="hover:text-white transition-colors duration-200"
                     >
                       {item}
@@ -62,7 +62,7 @@ const FooterComponent = () => {
               {["Help Docs", "Guide", "Updates", "Contact Us"].map((item) => (
                 <li key={item}>
                   <a
-                    href="#"
+                    // href="#"
                     className="hover:text-white transition-colors duration-200"
                   >
                     {item}

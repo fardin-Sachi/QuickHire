@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import JobCardComponent from "./JobCardComponent";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useSearchParams } from "react-router-dom";
 import { ArrowLeft } from "lucide-react";
 import { jobApiService } from "../services/job.service";
 import type { Job } from "../types/Job";
@@ -14,6 +14,8 @@ const getLogoById = (jobId: number) =>
 
 const JobListComponent = () => {
   const navigate = useNavigate();
+  const [searchParams] = useSearchParams();
+  const category = searchParams.get("category");
 
   const [jobs, setJobs] = useState<JobWithLogo[]>([]);
   const [page, setPage] = useState(1);
@@ -24,11 +26,24 @@ const JobListComponent = () => {
     const fetchJobs = async () => {
       try {
         setLoading(true);
-        const response = await jobApiService.getJobs({ page, limit: 10 });
+
+        let response;
+
+        if (category) {
+          response = await jobApiService.getJobsByCategory({
+            page,
+            limit: 10,
+            category: category.split(",")
+          });
+        } else {
+          response = await jobApiService.getJobs({ page, limit: 10 });
+        }
+
         const jobsWithLogos = response.data.map((job) => ({
           ...job,
           logo: getLogoById(job.id),
         }));
+
         setJobs(jobsWithLogos);
         setTotalPages(response.pagination.totalPages);
       } catch (err) {
@@ -37,10 +52,11 @@ const JobListComponent = () => {
         setLoading(false);
       }
     };
-    fetchJobs();
-  }, [page]);
 
-  if(loading) {
+    fetchJobs();
+  }, [page, category]);
+
+  if (loading) {
     return <LoaderComponent fullScreen />;
   }
 
@@ -56,7 +72,15 @@ const JobListComponent = () => {
         </button>
 
         <h2 className="text-3xl font-bold mb-10">
-          All <span className="text-blue-500">Jobs</span>
+          {category ? (
+            <>
+              {category} <span className="text-blue-500">Jobs</span>
+            </>
+          ) : (
+            <>
+              All <span className="text-blue-500">Jobs</span>
+            </>
+          )}
         </h2>
 
         {/* Job Grid */}

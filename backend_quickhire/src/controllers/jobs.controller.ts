@@ -143,6 +143,65 @@ export const getJobById = async (req: Request, res: Response) => {
   }
 }
 
+export const getJobsByCategory = async (req: Request, res: Response) => {
+  try {
+    const categoryQuery = req.query.category?.toString().trim();
+
+    if(!categoryQuery) {
+      return res.status(400).json({
+        success: false,
+        message: "At least one category is required",
+      });
+    }
+
+    // Split comma-separated string into array
+    const categories = categoryQuery
+      .split(",")
+      .map((c) => c.trim())
+      .filter(Boolean);
+
+    const page = Number(req.query.page) || 1;
+    const limit = Number(req.query.limit) || 10;
+
+    if(page < 1 || limit < 1) {
+      return res.status(400).json({
+        success: false,
+        message: "Page and limit must be positive numbers",
+      });
+    }
+
+    const skip = (page - 1) * limit;
+
+    const where: Prisma.JobWhereInput = {
+      category: { hasSome: categories },
+    };
+
+    const [jobs, total] = await Promise.all([
+      prisma.job.findMany({
+        where,
+        skip,
+        take: limit,
+        orderBy: { id: "desc" },
+      }),
+      prisma.job.count({ where }),
+    ]);
+
+    const totalPages = Math.ceil(total / limit);
+
+    res.status(200).json({
+      success: true,
+      data: jobs,
+      pagination: { total, page, limit, totalPages },
+    });
+  } catch (err) {
+    console.error("Error fetching jobs by category:", err);
+    res.status(500).json({
+      success: false,
+      message: "Internal server error",
+    });
+  }
+}
+
 // Get available location for all the jobs
 export const getAvailableLocations = async (req: Request, res: Response) => {
   try {
@@ -157,6 +216,53 @@ export const getAvailableLocations = async (req: Request, res: Response) => {
     res.status(500).json({ success: false, message: "Internal server error" });
   }
 }
+
+// Get all unique categories across jobs
+export const getAllCategories = async (req: Request, res: Response) => {
+  try {
+    const page = Number(req.query.page) || 1;
+    const limit = Number(req.query.limit) || 10;
+
+    if(page < 1 || limit < 1) {
+      return res.status(400).json({
+        success: false,
+        message: "Page and limit must be positive numbers",
+      });
+    }
+
+    const jobs = await prisma.job.findMany({
+      select: { category: true },
+    });
+
+    // Flatten + unique
+    const uniqueCategories = [
+      ...new Set(jobs.flatMap((job) => job.category)),
+    ];
+
+    const total = uniqueCategories.length;
+    const totalPages = Math.ceil(total / limit);
+
+    const start = (page - 1) * limit;
+    const paginatedCategories = uniqueCategories.slice(start, start + limit);
+
+    res.status(200).json({
+      success: true,
+      data: paginatedCategories,
+      pagination: {
+        total,
+        page,
+        limit,
+        totalPages,
+      },
+    });
+  } catch (err) {
+    console.error("Error fetching categories:", err);
+    res.status(500).json({
+      success: false,
+      message: "Internal server error",
+    });
+  }
+};
 
 // Delete a job by ID
 export const deleteJobById = async (req: Request, res: Response) => {

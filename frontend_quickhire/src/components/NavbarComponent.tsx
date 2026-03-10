@@ -31,8 +31,10 @@ function Navbar() {
           <Link className="hover:text-blue-600 transition"
               to="/jobs">
               Find Jobs
-            </Link>
-          <a href="#" className="hover:text-blue-600 transition">
+          </Link>
+          <a className="hover:text-blue-600 transition" 
+            // href="#" 
+            >
             Browse Companies
           </a>
         </nav>
@@ -60,10 +62,14 @@ function Navbar() {
       {/* MOBILE DROPDOWN */}
       {isOpen && (
         <div className="md:hidden px-6 pb-6 space-y-4 bg-[#f4f6fb]">
-          <a href="#" className="block text-gray-700">
+          <Link className="block text-gray-700"
+            to="/jobs"
+            >
             Find Jobs
-          </a>
-          <a href="#" className="block text-gray-700">
+          </Link>
+          <a className="block text-gray-700"
+            // href="#"
+            >
             Browse Companies
           </a>
 
